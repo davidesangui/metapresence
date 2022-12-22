@@ -27,8 +27,8 @@ The output consists both in the output of inStrain quick_profile, that is a fold
 
 ### Mandatory:
 - all_sequences.fasta: a fasta file containing all the genomes that has to be analyzed.
-- sorted_bam: either an indexed sorted bam file of the alignment on the fasta file, or the command line of bowtie2 to do it. In case, the sorted bam file must be
-  indexed and the index must be in the same folder. If bowtie2 is launched, the index will be automatically created.
+- sorted_bam/bowtie2: either an indexed sorted bam file of the alignment on the fasta file, or the command line of bowtie2 to do it. In case, the sorted bam file must
+  be indexed and the index must be in the same folder (the index is needed by pysam). If bowtie2 is launched, the index will be automatically created.
 - -s coverm_input.txt: input file for coverm. A file with each line listing a scaffold and a bin name, tab-seperated. 
 
 ### Options:
