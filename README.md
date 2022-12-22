@@ -1,7 +1,7 @@
 # metapresence
 Calculation of metrics for evaluating the distribution of aligned reads on a genome.
 
-Starting from a sorted bam file and a list of genomes, metapresence evaluates the randomness of the distribution of the reads by calculating different metrics:
+Starting from an indexed sorted bam (with the index in the same folder) file and a list of genomes, metapresence evaluates the randomness of the distribution of the reads by calculating different metrics:
 - coverage and breadth per genome using coverm (version 0.6.1 or above) launched via inStrain quick_profile (version 1.5.7 or above). Both the actual breadth and the ratio between breadth and expected breadth are returned. The expected breadth is calculated using the formula reported in https://instrain.readthedocs.io/en/latest/important_concepts.html ,section 6: detecting organisms in metagenomic data.
 - average distance between the mapping position of two consecutive reads among all the possible pairs (in case of paired-end reads, only the first mate encountered in the sorted bam file is considered). This metric is returned as a ratio real/expected, where the expected value is given by the length of the scaffold and the number of reads considered.
 - average distance between the mapping positions of two reads of randomly sampled pairs, divided by the length of the scaffold (in case of paired-end reads, only the first mate encountered in the sorted bam file is considered). This metric is returned as a ratio real/expected, where the expected value is 1/3.
@@ -22,12 +22,13 @@ The output consists both in the output of inStrain quick_profile, that is a fold
   The exclamation mark separates the command for bowtie2 and the one for metapresence.py.
   
 **Without bowtie2:**
-  `sorted.bam ! [options] -s coverm_input.txt all_sequences.fasta`
+  `(indexed)sorted.bam ! [options] -s coverm_input.txt all_sequences.fasta`
   The exclamation mark separates the input sorted bam file  and the command for metapresence.py.
 
 ### Mandatory:
 - all_sequences.fasta: a fasta file containing all the genomes that has to be analyzed.
-- sorted_bam: either a sorted bam file of the alignment on the fasta file, or the command line of bowtie2 to do it.
+- sorted_bam: either an indexed sorted bam file of the alignment on the fasta file, or the command line of bowtie2 to do it. In case, the sorted bam file must be
+  indexed and the index must be in the same folder. If bowtie2 is launched, the index will be automatically created.
 - -s coverm_input.txt: input file for coverm. A file with each line listing a scaffold and a bin name, tab-seperated. 
 
 ### Options:
