@@ -1,7 +1,7 @@
 # metapresence
 Calculation of metrics for evaluating the distribution of aligned reads on a genome.
 
-Starting from an indexed sorted bam (with the index in the same folder) file and a list of genomes, metapresence evaluates the randomness of the distribution of the reads by calculating different metrics:
+Starting from an indexed sorted bam file (with the index in the same folder) and a list of genomes, metapresence evaluates the randomness of the distribution of the reads by calculating different metrics:
 - coverage and breadth per genome using coverm (version 0.6.1 or above) launched via inStrain quick_profile (version 1.5.7 or above). Both the actual breadth and the ratio between breadth and expected breadth are returned. The expected breadth is calculated using the formula reported in https://instrain.readthedocs.io/en/latest/important_concepts.html ,section 6: detecting organisms in metagenomic data.
 - average distance between the mapping position of two consecutive reads among all the possible pairs (in case of paired-end reads, only the first mate encountered in the sorted bam file is considered). This metric is returned as a ratio real/expected, where the expected value is given by the length of the scaffold and the number of reads considered.
 - average distance between the mapping positions of two reads of randomly sampled pairs, divided by the length of the scaffold (in case of paired-end reads, only the first mate encountered in the sorted bam file is considered). This metric is returned as a ratio real/expected, where the expected value is 1/3.
