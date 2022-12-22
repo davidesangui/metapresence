@@ -18,17 +18,17 @@ The output consists both in the output of inStrain quick_profile, that is a fold
   `python3 metapresence.py -h`
 
 **With bowtie2:**
-  `bowtie2 alignment launch ! [options] -s coverm_input.txt all_sequences.fasta`
+  `python3 metapresence.py bowtie2 alignment launch ! [options] -s coverm_input.txt all_sequences.fasta`
   The exclamation mark separates the command for bowtie2 and the one for metapresence.py.
   
 **Without bowtie2:**
-  `(indexed)sorted.bam ! [options] -s coverm_input.txt all_sequences.fasta`
-  The exclamation mark separates the input sorted bam file  and the command for metapresence.py.
+  `python3 metapresence.py (indexed)sorted.bam ! [options] -s coverm_input.txt all_sequences.fasta`
+  The exclamation mark separates the input sorted bam file and the command for metapresence.py.
 
 ### Mandatory:
 - all_sequences.fasta: a fasta file containing all the genomes that has to be analyzed.
 - sorted_bam/bowtie2: either an indexed sorted bam file of the alignment on the fasta file, or the command line of bowtie2 to do it. In case, the sorted bam file must
-  be indexed and the index must be in the same folder (the index is needed by pysam). If bowtie2 is launched, the index will be automatically created.
+  be indexed and the index (.bai) must be in the same folder (the index is needed by pysam). If bowtie2 is launched, the index will be automatically created.
 - -s coverm_input.txt: input file for coverm. A file with each line listing a scaffold and a bin name, tab-seperated. 
 
 ### Options:
