@@ -2,13 +2,13 @@
 Calculation of metrics for evaluating the distribution of aligned reads on a genome.
 
 Starting from an indexed sorted bam file (with the index in the same folder) and a list of genomes, metapresence evaluates the randomness of the distribution of the reads by calculating different metrics:
-- coverage and breadth per genome using coverm (version 0.6.1 or above) launched via inStrain quick_profile (version 1.5.7 or above). Both the actual breadth and the ratio between breadth and expected breadth are returned. The expected breadth is calculated using the formula reported in https://instrain.readthedocs.io/en/latest/important_concepts.html ,section 6: detecting organisms in metagenomic data.
-- average distance between the mapping position of two consecutive reads among all the possible pairs (in case of paired-end reads, only the first mate encountered in the sorted bam file is considered). This metric is returned as a ratio real/expected, where the expected value is given by the length of the scaffold and the number of reads considered.
+- coverage and breadth per genome using coverm (version 0.6.1 or above) launched via inStrain quick_profile (version 1.5.7). Both the actual breadth and the ratio between breadth and expected breadth are returned. The expected breadth is calculated using the formula reported in https://instrain.readthedocs.io/en/latest/important_concepts.html ,section 6: detecting organisms in metagenomic data.
+- average distance between the mapping position of two consecutive reads among all the possible pairs (in case of paired-end reads, only the first mate encountered in the sorted bam file is considered). This metric is returned as a ratio real/expected, where the expected value is given by the length of the scaffold divided by the number of reads considered.
 - average distance between the mapping positions of two reads of randomly sampled pairs, divided by the length of the scaffold (in case of paired-end reads, only the first mate encountered in the sorted bam file is considered). This metric is returned as a ratio real/expected, where the expected value is 1/3.
 
 The two latter metrics are calculated at the level of a single scaffold. The whole-genome values are given by an average of the values of each scaffold weighted for the ratio between the length of the scaffold and the length of the genome.
 
-If needed, instead of giving as input a sorted bam file, it is possible to launch bowtie2 (version 2.3.5.1 or above) via metapresence.py. The output of bowtie2 will be piped into samtools (version 1.9 or above) to be converted to bam and sorted.
+If needed, instead of giving as input a sorted bam file, it is possible to launch bowtie2 (version 2.3.5.1) via metapresence.py. The output of bowtie2 will be piped into samtools (version 1.9 or above) to be converted to bam and sorted.
 ## Output
 
 The output consists both in the output of inStrain quick_profile, that is a folder marked by the suffix "coverm", and in two tsv files, one containing the metrics at the level of single scaffolds, the other at the genome level, marked by the suffix "scaffolds" or "genomes" respectively.
@@ -40,3 +40,10 @@ The output consists both in the output of inStrain quick_profile, that is a fold
   For scaffolds with less than three unique mates mapping on it the distance metrics will not be calculated, but they will weight in the genomic average with the
   assigned value
 - -o the prefix of the coverm output and of the .tsv output files. Default: metrics
+
+## Dependencies
+- inStrain 1.5.7
+- coverM 0.6.1
+- samtools 1.14
+- bowtie 2 2.3.5.1
+
