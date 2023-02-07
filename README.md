@@ -18,7 +18,7 @@ The output consists in two tsv files, one containing the metrics at the level of
   `python3 metapresence.py -h`
   
 **Command line**
-   `python3 metapresence.py [options] -s scaffold_to_bin.txt indexed_sorted.bam all_sequences.fasta`
+   `python3 metapresence.py [options] scaffold_to_bin.txt indexed_sorted.bam all_sequences.fasta`
 
 ### Mandatory:
 - all_sequences.fasta: a fasta file containing all the genomes that are to be analyzed.
