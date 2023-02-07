@@ -14,16 +14,16 @@ The output consists in two tsv files, one containing the metrics at the level of
 
 ## Usage
 **Help page:**
-  `python3 metapresence.py -h
-  `
+  `python3 metapresence.py -h`
+  
 **Command line**
-   python3 metapresence.py [options] -s scaffold_to_bin.txt indexed_sorted.bam all_sequences.fasta
+   `python3 metapresence.py [options] -s scaffold_to_bin.txt indexed_sorted.bam all_sequences.fasta`
 
 ### Mandatory:
-- all_sequences.fasta: a fasta file containing all the genomes that has to be analyzed.
-- sorted_bam/bowtie2: either an indexed sorted bam file of the alignment on the fasta file, or the command line of bowtie2 to do it. In case, the sorted bam file must
-  be indexed and the index (.bai) must be in the same folder (the index is needed by pysam). If bowtie2 is launched, the index will be automatically created.
-- -s coverm_input.txt: input file for coverm. A file with each line listing a scaffold and a bin name, tab-seperated. 
+- all_sequences.fasta: a fasta file containing all the genomes that are to be analyzed.
+- indexed_sorted_bam: indexed sorted bam file of the alignment on the fasta file. The sorted bam file must be indexed and the index (.bai) must be in the same
+  folder (the index is needed by pysam). 
+- scaffold_to_bin.txt: A file with each line listing a scaffold and a bin name, tab-seperated. 
 
 ### Options:
 - -p [int], number of processes to be executed in parallel. Default: 1 .
@@ -36,8 +36,6 @@ The output consists in two tsv files, one containing the metrics at the level of
 - -o the prefix of the coverm output and of the .tsv output files. Default: metrics
 
 ## Dependencies
-- inStrain 1.5.7
-- coverM 0.6.1
-- samtools 1.14
-- bowtie 2 2.3.5.1
+- numpy 1.23.3 (https://www.numpy.org)
+- pysam 0.19.1 (https://github.com/pysam-developers/pysam)
 
