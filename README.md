@@ -8,22 +8,16 @@ Starting from an indexed sorted bam file (with the index in the same folder) and
 
 The two latter metrics are calculated at the level of a single scaffold. The whole-genome values are given by an average of the values of each scaffold weighted for the ratio between the length of the scaffold and the length of the genome.
 
-If needed, instead of giving as input a sorted bam file, it is possible to launch bowtie2 (version 2.3.5.1) via metapresence.py. The output of bowtie2 will be piped into samtools (version 1.9) to be converted to bam and sorted. This sorted bam file will be used as input of metapresence.py .
 ## Output
 
-The output consists both in the output of inStrain quick_profile, that is a folder marked by the suffix "coverm", and in two tsv files, one containing the metrics at the level of single scaffolds, the other at the genome level, marked by the suffix "scaffolds" or "genomes" respectively.
+The output consists in two tsv files, one containing the metrics at the level of single scaffolds, the other at the genome level, marked by the suffix "scaffolds" or "genomes" respectively.
 
 ## Usage
 **Help page:**
-  `python3 metapresence.py -h`
-
-**With bowtie2:**
-  `python3 metapresence.py bowtie2 alignment launch ! [options] -s coverm_input.txt all_sequences.fasta`
-  The exclamation mark separates the command for bowtie2 and the one for metapresence.py.
-  
-**Without bowtie2:**
-  `python3 metapresence.py (indexed)sorted.bam ! [options] -s coverm_input.txt all_sequences.fasta`
-  The exclamation mark separates the input sorted bam file and the command for metapresence.py.
+  `python3 metapresence.py -h
+  `
+**Command line**
+   python3 metapresence.py [options] -s scaffold_to_bin.txt indexed_sorted.bam all_sequences.fasta
 
 ### Mandatory:
 - all_sequences.fasta: a fasta file containing all the genomes that has to be analyzed.
