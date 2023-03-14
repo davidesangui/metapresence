@@ -40,3 +40,21 @@ The output consists in two tsv files, one containing the metrics at the level of
 - numpy 1.23.3 (https://www.numpy.org)
 - pysam 0.19.1 (https://github.com/pysam-developers/pysam)
 
+
+# functional redundancy (fred.py)
+Per adesso calcolo tutte le metriche che ho raccolto e le mando a un file tsv, sia quelle "community-level" sia quelle per la singola funzione. le singole funzioni per ora sono i ko e i moduli (anche se i moduli per ora li considero sempre presenti, poi bisognerà definire se ci sono o no in base alla completezza)
+## Script
+* Nella prima parte dello script calcolo le relative abundances a partire dal bam, dal fasta e dal file di input che serve a binnare in genomi le varie contig presenti nel fasta. la relative abundance la calcolo normalizzando le reads che mappano su un genoma cosi: Rnorm = R * (sum_all_genome_length / genome_length ). La relative abundance è quindi (Rnorm / sum_all_Rnorm). Alla fine le abbondanze sono ritornate con un dizionario (genoma : abbondanza).
+  * La velocità della prima parte dipende dal numero di reads mappate nel bam (a meno che non sia un fasta file molto grande che diventa significativo nel tempo della prima parte). con le 100 milioni di reads di cami_medium ci mette un paio di minuti (su ion)
+- Nella seconda parte invece analizzo le funzioni dal file emapper.annotations.
+  - considerando ad esempio i ko, innanzitutto assegno a ciascun ko che incontro nel file un indice in un dizionario (ko : indice) che sarà la sua posizione in una lista che corrisponde al profilo funzionale del genoma
+  - quindi assegno a ciascun genoma il profilo funzionale in un dizionario (genoma : profilo). il profilo funzionale è una lista di n posizioni (n = numero di ko nel file), dove ogni posizione corrisponde a un ko definito dall'indice assegnato prima. Ogni posizione della lista è 1 se il genoma ha il ko, 0 se non ce l'ha. Per assegnare ciascun ko al genoma a cui appartiene bisogna per forza che il nome di ciascun gene nel file di annotazioni contenga il nome del genoma da cui proviene (o al limite della contig, il genoma della quale può essere ripescato dal file di input contig-genoma).
+  - quindi, a partire da questo dizionario di profili funzionali, calcolo l'overlap funzionale fra tutte le coppie di genomi e lo salvo in un altro dizionario (genoma : lista di overlap); nella lista di overlap ogni posizione corrisponde a un genoma, avendo preventivamente indexato i genomi analogamente a quanto fatto coi ko.
+  - l'overlap funzionale lo calcolo come jaccard distance (1 - intersezione/unione, la jaccard distance perchè lo fa Tian per lo stesso scopo https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7719190/ ) iterando parallelamente sopra i profili funzionali della coppia di genomi.
+  - con le relative abundances, i profili funzionali e la jaccard distance di ogni coppia di genomi posso calcolare tutte le metriche, sia per la singola funzione che community-level.
+- La velocità della seconda parte dipende dal numero di genomi e dal numero di funzioni considerate. coi 132 genomi di cami_medium e coi soli ko ci mette meno di un minuto (su ion).
+- lo stesso procedimento può essere ripetuto per tutte le funzioni presenti. Per ora l'ho fatto solo per i moduli, ma per i moduli bisogna appunto aggiustare in base alla loro completezza, cosa che ancora non ho messo.
+- l'output per ora è un file tsv (uno per funzione) con le prime due linee che sono i valori community-level, e poi i valori di single function per ciascuna funzione.
+## Dependencies
+- pysam 0.19.1
+
