@@ -41,14 +41,14 @@ The output consists in two tsv files, one containing the metrics at the level of
 - pysam 0.19.1 (https://github.com/pysam-developers/pysam)
 
 # metapresence modificato
-La cosa diversa è che cambiato le metriche di distanza. Ho lasciato solo la distanza tra reads successive, ma fatta in maniera tale che distanze inattese pesino proporzionalmente alla loro dimensione.
-La metrica è calcolata per ciascuna mate. La distanza attesa è la lunghezza della sequenza diviso il numero di reads (una o l'altra mate) che vi mappano.
-Per prima cosa unisco tutte le contig in un'unica sequenza continua, salvo tutte le posizioni in cui le reads mappano su questa sequenza in una lista, e quindi metto una read inventata all'inizio e alla fine di questa sequenza.
-Quindi definisco una finestra ampia tanto quanto è la distanza attesa fra due reads più uno. mi muovo con questa finestra una base alla volta e per ogni base vedo se c'è o non c'è una read dentro alla finestra. Se c'è non faccio niente, se non c'è tolgo 1 ad una variabile che parte da un valore che è uguale alla lunghezza della sequenza. Questo per ogni base fino alla fine della sequenza continua (meno la dimensione della finestra).
-Lo score finale è la variabile a cui ho tolto i vari 1 diviso la lunghezza della sequenza. Se tutte le read mappano entro la distanza attesa, lo score finale sarà uno.
-Maggiore è il gap tra la distanza attesa e la distanza effettiva, più si abbasserà lo score. Così, mentre per genomi presenti lo score sta intorno a 0.65, per genomi assenti tende a essere più basso perchè, anche se gruppi di reads possono mappare uniformemente in regioni conservate, tenderanno a mappare a macchie e quindi i gap inaspettatamente grandi saranno visti e pesati proporzionalmente.
-Se le reads mappassero uniformemente in un'unica regione, la metrica avrebbe un valore atteso. Per questo metto una read all'inizio e alla fine della sequenza.
-In realtà non faccio veramente questa cosa base per base, ma per ogni posizione registrata tolgo alla variabile: distanza con successiva - dimensione finestra. è la stessa cosa ma più veloce.
+- La cosa diversa è che cambiato le metriche di distanza. Ho lasciato solo la distanza tra reads successive, ma fatta in maniera tale che distanze inattese pesino proporzionalmente alla loro dimensione.
+- La metrica è calcolata per ciascuna mate. La distanza attesa è la lunghezza della sequenza diviso il numero di reads (una o l'altra mate) che vi mappano.
+- Per prima cosa unisco tutte le contig in un'unica sequenza continua, salvo tutte le posizioni in cui le reads mappano su questa sequenza in una lista, e quindi metto una read inventata all'inizio e alla fine di questa sequenza.
+- Quindi definisco una finestra ampia tanto quanto è la distanza attesa fra due reads più uno. mi muovo con questa finestra una base alla volta e per ogni base vedo se c'è o non c'è una read dentro alla finestra. Se c'è non faccio niente, se non c'è tolgo 1 ad una variabile che parte da un valore che è uguale alla lunghezza della sequenza. Questo per ogni base fino alla fine della sequenza continua (meno la dimensione della finestra).
+- Lo score finale è la variabile a cui ho tolto i vari 1 diviso la lunghezza della sequenza. Se tutte le read mappano entro la distanza attesa, lo score finale sarà uno.
+- Maggiore è il gap tra la distanza attesa e la distanza effettiva, più si abbasserà lo score. Così, mentre per genomi presenti lo score sta intorno a 0.65, per genomi assenti tende a essere più basso perchè, anche se gruppi di reads possono mappare uniformemente in regioni conservate, tenderanno a mappare a macchie e quindi i gap inaspettatamente grandi saranno visti e pesati proporzionalmente.
+- Se le reads mappassero uniformemente in un'unica regione, la metrica avrebbe un valore atteso. Per questo metto una read all'inizio e alla fine della sequenza.
+- In realtà non faccio veramente questa cosa base per base, ma per ogni posizione registrata tolgo alla variabile: distanza con successiva - dimensione finestra. è la stessa cosa ma più veloce.
 
 
 
