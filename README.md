@@ -41,7 +41,7 @@ The output consists in two tsv files, one containing the metrics at the level of
 - pysam 0.19.1 (https://github.com/pysam-developers/pysam)
 
 # metapresence modificato
-- La cosa diversa è che cambiato le metriche di distanza. Ho lasciato solo la distanza tra reads successive, ma fatta in maniera tale che distanze inattese pesino proporzionalmente alla loro dimensione.
+- La cosa diversa è che ho cambiato le metriche di distanza. Ho lasciato solo la distanza tra reads successive, ma fatta in maniera tale che distanze inattese pesino proporzionalmente alla loro dimensione.
 - La metrica è calcolata per ciascuna mate. La distanza attesa è la lunghezza della sequenza diviso il numero di reads (una o l'altra mate) che vi mappano.
 - Per prima cosa unisco tutte le contig in un'unica sequenza continua, salvo tutte le posizioni in cui le reads mappano su questa sequenza in una lista, e quindi metto una read inventata all'inizio e alla fine di questa sequenza.
 - Quindi definisco una finestra ampia tanto quanto è la distanza attesa fra due reads più uno. mi muovo con questa finestra una base alla volta e per ogni base vedo se c'è o non c'è una read dentro alla finestra. Se c'è non faccio niente, se non c'è tolgo 1 ad una variabile che parte da un valore che è uguale alla lunghezza della sequenza. Questo per ogni base fino alla fine della sequenza continua (meno la dimensione della finestra).
