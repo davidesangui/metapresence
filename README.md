@@ -25,7 +25,7 @@ The output consists in a tsv file containing the metrics at the genome level, an
 
 ### Options:
 - -p [int], number of processes to be executed in parallel. Default: 1 .
-- -o the prefix of the coverm output and of the output files. Default: metrics
+- -o the prefix of the coverm output and of the output files. Default: metapout
 - --unpaired set this flag if the aligned reads are not paired. Default: FALSE
 ## Dependencies
 Metapresence requires only the Python modules Pysam and Numpy. It was tested using the following versions of these packages, but it should work fine with any more recent version.
