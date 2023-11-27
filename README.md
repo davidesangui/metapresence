@@ -1,7 +1,7 @@
 # metapresence
 Calculation of metrics for evaluating the distribution of aligned reads on a genome.
 
-Starting from an indexed sorted bam file (with the index in the same folder) and a list of genomes, metapresence evaluates the evenness of the distribution of the reads by calculating two metrics:
+Starting from an indexed sorted bam file (with the index in the same folder) and a list of genomes, metapresence evaluates the evenness of the distribution of the reads by calculating various metrics:
 - coverage per genome. The coverage is calculated as the mean of the depth at each position. When calculating the per-base depth, cigar operations and quality scores are ignored.
 - breadth per genome and BER metric.  Both the actual breadth and the ratio between breadth and expected breadth (BER) are returned. The expected breadth is calculated using the formula reported in https://instrain.readthedocs.io/en/latest/important_concepts.html ,section 6: detecting organisms in metagenomic data.
 - FUG metric. The FUG metric is calculated as the as normalized value of the cumulative distribution function of the frequencies of distances between consecutive reads for values greater than the expected distance. The output reports FUG metric for both group of mates when the reads are paired-end. 
