@@ -18,7 +18,7 @@ The output consists in a tsv file containing the metrics at the genome level, an
    `python3 metapresence.py [options] contig_genomes indexed_sorted.bam all_sequences.fasta`
 
 ### Mandatory:
-- all_sequences.fasta: a fasta file containing all the genomes that are to be analyzed. 
+- all_sequences.fasta: a fasta file containing all the genomes that are to be analyzed. (When <contig_genomes> is a folder, this file is not needed, but a value for this argument has to be provided anyway) 
 - indexed_sorted_bam: indexed sorted bam file of the alignment on the fasta file. The sorted bam file must be indexed and the index (.bai) must be in the same
   folder (the index is needed by pysam). 
 - contig_genomes: Either a file with each line listing a scaffold and a bin name, tab-seperated, or the path to a folder containing all (and only) the fasta files of the genomes to analyze. 
