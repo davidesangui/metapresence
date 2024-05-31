@@ -1,6 +1,6 @@
 # Metapresence
 Calculation of metrics for evaluating the distribution of aligned reads onto nucleotidic sequences.  
-While Metapresence was developed to for the purpose of identify present species in shotgun metagenomic sequencing data, it can potentially be used to assess the evenness of read distribution onto any kind of DNA/RNA sequences starting from the result of a sequence alignment, provided that the sequences are in FASTA format and the alignment is reported as a sorted and indexed BAM file.  
+While Metapresence was developed for the purpose of identifying present species in shotgun metagenomic sequencing data, it can potentially be used to assess the evenness of read distribution onto any kind of DNA/RNA sequences starting from the result of a sequence alignment, provided that the sequences are in FASTA format and the alignment is reported as a sorted and indexed BAM file.  
 
 The associated article can be found at: ...   
 If you use Metapresence, please cite via: ...
@@ -23,7 +23,7 @@ Or you can install them with pip:
 pip install numpy
 pip install pysam
 ```
-Once you have installed the two dependencies, simply download the file < metapresence.py > from this repository, and run it with Python3:
+Once you have installed the two dependencies, simply download the file < metapresence.py > from this repository, and run it with Python:
 ```
 python3 metapresence.py -h
 ```
@@ -52,8 +52,8 @@ For example:
 ```
 python3 metapresence.py refgen_folder alignment_sorted.bam -min_reads 30 -ber_threshold 0.7 -fug_threshold 0.4 -max_for_fug 0.2 -fug_criterion mean
 ```
-If the reads are not paired, the flag ```--unpaired``` should be set. In this case, the flag ```fug_criterion``` is irrilevant.  
-The identification of "present" sequences using the criteria described above can be done by the user by parsing the _metrics.tsv output file.
+If the reads are not paired, the flag ```--unpaired``` should be set. In this case, the flag ```-fug_criterion``` is irrilevant.  
+
 
 
 
