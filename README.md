@@ -77,7 +77,7 @@ For example:
 ```
 python3 metapresence.py ref_genomes alignment.sorted.bam -min_reads 30 -ber_threshold 0.7 -fug_threshold 0.4 -max_for_fug 0.2 -fug_criterion mean
 ```
-If the reads are not paired, the flag ```--unpaired``` should be set. In this case, the flag ```-fug_criterion``` is irrilevant.  
+If the reads are not paired, the flag ```--unpaired``` should be set. In this case, the flag ```-fug_criterion``` is irrelevant.  
 
 The input sequences can be either a folder of fasta files, or a fasta file with one or more contigs. If the case is the latter, a text file should be provided with the flag ```-input_bins```. This file is necessary to cluster different contigs as belonging to the same sequence (for instance, a genome). In this text file, each line should list the names of a contig and of the sequence to which it belongs, tab-separated.  
 If each contig should be treated as an independent sequence, then each line of this text file should list the name of a contig and, tab-separated, again the name of the contig. More simply, the same result can be obtained by setting the flag ```--all_contigs```. 
