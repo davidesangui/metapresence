@@ -54,6 +54,7 @@ python3 metapresence.py refgen_folder alignment_sorted.bam -min_reads 30 -ber_th
 ```
 If the reads are not paired, the flag ```--unpaired``` should be set. In this case, the flag ```-fug_criterion``` is irrilevant.  
 
+... --all_contigs ...
 
 
 
