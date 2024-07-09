@@ -2,8 +2,9 @@
 Calculation of metrics for evaluating the distribution of aligned reads onto nucleotidic sequences.  
 While Metapresence was developed for the purpose of identifying present species in shotgun metagenomic sequencing data, it can potentially be used to assess the evenness of read distribution onto any kind of DNA/RNA sequences starting from the result of a sequence alignment, provided that the sequences are in FASTA format and the alignment is reported as a sorted and indexed BAM file.  
 
-The associated article can be found at: ...   
-If you use Metapresence, please cite via: ...
+The associated article can be found at: https://doi.org/10.1128/msystems.00213-24   
+If you use Metapresence, please cite via: 
+*Sanguineti D, Zampieri G, Treu L, Campanaro S.0.Metapresence: a tool for accurate species detection in metagenomics based on the genome-wide distribution of mapping reads. mSystems0:e00213-24.https://doi.org/10.1128/msystems.00213-24*
 
 ## Installation
 The Python packages numpy and pysam are needed to use Metapresence. You can either create a conda environment and install them in the following way:
