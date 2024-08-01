@@ -1,16 +1,4 @@
 import argparse
-import os
-try:
-    import numpy as np
-except ImportError:
-    print('Error: numpy is not installed.')
-    exit(1)
-try:                              
-    import pysam
-except ImportError:
-    print('Error: pysam is not installed.')
-    exit(1)
-import multiprocessing
 
 parser=argparse.ArgumentParser(description='Parse metrics file to generate abundance file. Useful to test different metrics thresholds without parsing the bam file.')
 parser.add_argument('-metrics',help='Output of metapresence.py containing the metric values (*_metrics.tsv).',required=True)
