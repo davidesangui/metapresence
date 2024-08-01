@@ -85,7 +85,7 @@ If each contig should be treated as an independent sequence, then each line of t
 
 ### Parsing metric output
 The time consuming step of metapresence.py is that of parsing the bam file to calculate the metric values. On the contrary, inferring relative abundances from the metric values is straightforward and fast.  
-It may be useful to test different metrics thresholds depending on the specific instance under investigation. In this case, it is useless and time-consuming re-calculate the metric values by running metapresence.py. In this repository, the script parse_metrics.py is available in the utils subdirectory. This script takes as input the metric output of metapresence.py (*_metrics.tsv) and outputs and abundance file based on the metric parameters given by the user.
+It may be useful to test different metrics thresholds depending on the specific instance under investigation. In this case, it is useless and time-consuming re-calculate the metric values by running metapresence.py. In this repository, the script parse_metrics.py is available in the utils subdirectory. This script takes as input the metric output of metapresence.py (*_metrics.tsv) and outputs an abundance file based on the metric threshold parameters given by the user.
 ```
 python3 parse_metrics.py -metrics example_metrics.tsv -output_abundances new_abundances.tsv -min_reads 30 -ber_threshold 0.7 -fug_threshold 0.4 -max_for_fug 0.2 -fug_criterion mean
 ```
