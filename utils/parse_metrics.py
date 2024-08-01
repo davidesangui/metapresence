@@ -90,4 +90,4 @@ if args.plot_metrics:
         plt.ylabel('FUG')
     else:
         plt.ylabel('mean FUG')
-    plt.savefig(args.metrics+".scatterplot.png")
+    plt.savefig(args.output_abundances+".scatterplot.png")
