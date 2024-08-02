@@ -82,7 +82,7 @@ If the reads are not paired, the flag ```--unpaired``` should be set. In this ca
 
 The input sequences can be either a folder of fasta files, or a fasta file with one or more contigs. If the case is the latter, a text file should be provided with the flag ```-input_bins```. This file is necessary to cluster different contigs as belonging to the same sequence (for instance, a genome). In this text file, each line should list the names of a contig and of the sequence to which it belongs, tab-separated.  
 If each contig should be treated as an independent sequence, then each line of this text file should list the name of a contig and, tab-separated, again the name of the contig. More simply, the same result can be obtained by setting the flag ```--all_contigs```. 
-
+## Additional scripts
 ### Parsing metric output
 The time consuming step of metapresence.py is that of parsing the bam file to calculate the metric values. On the contrary, inferring relative abundances from the metric values is straightforward and fast.  
 It may be useful to test different metrics thresholds depending on the specific instance under investigation. In this case, it is useless and time-consuming to re-calculate the metric values by running metapresence.py. In this repository, the script parse_metrics.py is available in the utils subdirectory. This script takes as input the metric output of metapresence.py (*_metrics.tsv) and outputs an abundance file based on the metric threshold parameters given by the user.
