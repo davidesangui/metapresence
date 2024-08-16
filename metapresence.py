@@ -77,9 +77,9 @@ def parse_SingleFasta(fastafile,scaffold_input,all_contigs):
         f=open(scaffold_input)
         for line in f:
             a=line.strip().split('\t')
-            try:
+            if a[1] in genome_contigs:
                 genome_contigs[a[1]].append(a[0])
-            except KeyError:
+            else:
                 genome_contigs[a[1]]=[a[0]]
         f.close()
     contigs_lengths_d={}
@@ -96,7 +96,8 @@ def parse_SingleFasta(fastafile,scaffold_input,all_contigs):
     f.close()
     return contigs_lengths_d,genome_contigs
 
-def pool_parse_MultiFasta(ff):
+def pool_parse_MultiFasta(args):
+    ff,all_contigs=args
     contigs_lengths_d,genome_contigs={},{}
     for fa in ff:
         f=open(fa)
@@ -105,10 +106,12 @@ def pool_parse_MultiFasta(ff):
             if line[0]=='>':
                 contig_name=line.strip().split()[0][1:]
                 contigs_lengths_d[contig_name]=0
-                if fa in genome_contigs:
-                    genome_contigs[fa].append(contig_name)
-                else:
-                    genome_contigs[fa]=[contig_name]
+                if not all_contigs:
+                    if fa in genome_contigs:
+                        genome_contigs[fa].append(contig_name)
+                    else:
+                        genome_contigs[fa]=[contig_name]
+                else: genome_contigs[contig_name]=[contig_name]
             else:
                 contigs_lengths_d[contig_name]+=len(line.strip())
     f.close()
@@ -224,8 +227,9 @@ if __name__ == "__main__":
         print('reading fasta files')
         fastas=[scaffold_input+'/'+x for x in os.listdir(scaffold_input)]
         chunked_fastas=chunks(fastas,processes)
+        parseFasta_args=[(x,args.all_contigs) for x in chunked_fastas]
         with multiprocessing.Pool(processes=processes) as pool:
-            all_parsing=pool.map(pool_parse_MultiFasta,chunked_fastas)
+            all_parsing=pool.map(pool_parse_MultiFasta,parseFasta_args)
         contigs_lengths_d,genome_contigs={x:result[0][x] for result in all_parsing for x in result[0]},{x:result[1][x] for result in all_parsing for x in result[1]}
         if args.all_contigs: genome_contigs={y:[y] for x in genome_contigs for y in genome_contigs[x]}
     elif os.path.isfile(scaffold_input):
