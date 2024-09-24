@@ -272,7 +272,7 @@ if __name__ == "__main__":
     print('genome\tlength\tcoverage\tbreadth\tBER\tFUG1\tFUG2\tread_count',file=new)
     for i in tord:
         a=tord[i].strip().split('\t')
-        cov,ber,fug1,fug2,nreads=float(a[1]),float(a[3]),float(a[4]),float(a[5]),int(a[6])
+        cov,ber,fug1,fug2,nreads=float(a[1]),float(a[3]),float(a[4]),(float(a[5]) if not args.unpaired else None),int(a[6])
         if parse_metrics(cov,ber,fug1,fug2,nreads,fug_criterion):
             present_coverage[i]=cov
         print(i+'\t'+tord[i],file=new)
