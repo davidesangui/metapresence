@@ -41,7 +41,7 @@ f=open(args.metrics); f.readline()
 present_coverage={}
 for i in f:
     a=i.strip().split('\t')
-    cov,ber,fug1,fug2,nreads=float(a[2]),float(a[4]),float(a[5]),float(a[6]),int(a[7])
+    cov,ber,fug1,fug2,nreads=float(a[2]),float(a[4]),(float(a[5]) if not args.unpaired else None),float(a[6]),int(a[7])
     if parse_metrics(cov,ber,fug1,fug2,nreads,fug_criterion):
         present_coverage[a[0]]=cov
 
