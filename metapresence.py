@@ -65,7 +65,7 @@ def parse_metrics(cov,ber,fug1,fug2,nreads,criterion):
             if ber>=ber_threshold and fug1>=fug_threshold and (fug2>=fug_threshold if not args.unpaired else True):
                 return True
         elif criterion=='any':
-            if ber>=ber_threshold and fug1>=fug_threshold or (fug2>=fug_threshold if not args.unpaired else False):
+            if ber>=ber_threshold and (fug1>=fug_threshold or (fug2>=fug_threshold if not args.unpaired else False)):
                 return True
         elif criterion=='mean':
             if ber>=ber_threshold and ((fug1+fug2)/2>=fug_threshold if not args.unpaired else fug1>=fug_threshold):
